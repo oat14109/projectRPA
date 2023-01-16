@@ -1,25 +1,29 @@
 from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
 # Start a web driver (e.g. Chrome)
-driver = webdriver.Chrome()
+driver = webdriver.Chrome('path/to/webdriver')
 
-# Navigate to a website
-driver.get("https://www.example.com/")
+# Navigate to the Google website
+driver.get("https://www.google.com/")
 
-# Find an element on the page by its ID and enter text
-driver.find_element_by_id("username").send_keys("myusername")
+# Find the search box element and enter a query
+search_box = driver.find_element(By.NAME, "q")
+search_box.send_keys("selenium python")
 
-# Find an element on the page by its name and enter text
-driver.find_element_by_name("password").send_keys("mypassword")
+# Find the search button element and click it
+search_button = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.NAME, "btnK")))
+search_button.click()
 
-# Find a button on the page by its text and click it
-driver.find_element_by_xpath("//button[contains(text(), 'Sign In')]").click()
 
-# Wait for a specific element to load on the page
+# Wait for the search results to load
 driver.implicitly_wait(10) # seconds
 
-# Find an element on the page by its class name and interact with it
-driver.find_element_by_class_name("my-class").click()
+# Find the first search result link and click it
+first_result = driver.find_element(By.XPATH,"//h3/a")
+first_result.click()
 
 # Close the web driver
 driver.close()
