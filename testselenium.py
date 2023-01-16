@@ -22,7 +22,7 @@ search_button.click()
 driver.implicitly_wait(10) # seconds
 
 # Find the first search result link and click it
-first_result = driver.find_element(By.XPATH,"//h3/a")
+first_result = driver.find_element(By.XPATH,"//a/h3")
 first_result.click()
 
 # Close the web driver
